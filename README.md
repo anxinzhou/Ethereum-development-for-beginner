@@ -19,18 +19,18 @@ truffle init
 2\. Set up a local Ethereum blockchain testnet
 
 After downloading and opening [Ganache](https://github.com/trufflesuite/ganache-ui), create a new workspace.
-Let's name the workspace *helloworld*. Importantly, we need to set the gas price to zero, so we can send transactions for free. Now, save our workspace. 
+Let's name the workspace *helloworld*. Importantly, set the gas price to zero, so we can send transactions for free. After that, save the workspace. 
 
 ![gas_price](figure/gas_price.png)
 
-Then, we need the rpc address of the testnet for the future steps. It is 127.0.0.1:7545 in my case.
+Now, we need the rpc address of the testnet for the future steps. It is 127.0.0.1:7545 in my case.
 
 ![rpc_server](figure/rpc_address.png)
 
 
 3\. Connect the Truffle project to the testnet
 
-Modify the configuration file *truffle-config.js*. By default, Truffle uses the network option *development*. Ensure that the host and port match the rpc address. 
+Modify the configuration file *truffle-config.js*. By default, Truffle uses the network option *development*. The host and port should match the rpc address. 
 ![rpc_config](figure/rpc_config.png)
 
 4\. Create a smart contract
@@ -53,7 +53,7 @@ contract Storage {
     }
 }
 ```
-The smart contract *Storage* is written in the language [Solidity](https://docs.soliditylang.org/en/latest/). It includes two functions, the function *store* saves a number to the blockchain. The function *retrieve* queries that number. Because this function is read-only, it is declared with the modifer *view*, which means this function can be called without a transaction. On the contrary, we need a transaction to call the function *store*.
+The smart contract *Storage* is written in the language [Solidity](https://docs.soliditylang.org/en/latest/). It includes two functions. The function *store* saves a number to the blockchain. The function *retrieve* queries that number. Because this function is read-only, it is declared with the modifer *view*, meaning that we need no transaction to call the function *retrieve*. On the contrary, we need a transaction to call the function *store*.
 
 5\. Create a script for deploying the smart contract
 
@@ -66,7 +66,7 @@ module.exports = function(deployer) {
   deployer.deploy(example);
 };
 ```
-In this code, the string "Storage" should match the name of our smart contract. Note that the script filename's prefix *2_* is necessary because it specifies the order of deploying smart contracts. The prefix *1_* is natively used by Truffle. 
+In this code, the parameter "Storage" should match the name of our smart contract. Note that the script filename's prefix *2_* is necessary because it specifies the order of deploying smart contracts. The prefix *1_* is natively used by Truffle. 
 
 6\. Deploy the smart contract
 
